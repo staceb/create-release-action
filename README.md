@@ -2,6 +2,9 @@
 
 # Github Create Release Action
 
+[![Actions Status](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/badge/frankjuniorr/github-create-release-action)](https://wdp9fww0r9.execute-api.us-west-2.amazonaws.com/production/results/frankjuniorr/github-create-release-action)
+[![GitHub release](https://img.shields.io/github/release/frankjuniorr/github-create-release-action.svg)](https://GitHub.com/frankjuniorr/github-create-release-action/releases/)
+
 GitHub Action to create GitHub Release automatically.
 
 <p align="center">
