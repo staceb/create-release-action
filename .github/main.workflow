@@ -3,13 +3,7 @@ workflow "Deploy Release" {
   resolves = [" Github Create Release"]
 }
 
-action "Filters for Master branch" {
-  uses = "actions/bin/filter@master"
-  args = "branch master"
-}
-
 action " Github Create Release" {
   uses = "./action-github-create-release"
-  needs = ["Filters for Master branch"]
   secrets = ["GITHUB_TOKEN"]
 }
