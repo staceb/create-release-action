@@ -42,6 +42,7 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
 fi
 
 current_branch=$(git branch | grep "^*" | awk '{print $2}')
+echo "$current_branch"
 if [ "$current_branch" = "master" ];then
 	# If null, is the first release
 	if [ $(git tag | wc -l) = "0" ];then
