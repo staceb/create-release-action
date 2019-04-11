@@ -41,14 +41,20 @@ if [[ -z "$GITHUB_TOKEN" ]]; then
   exit 1
 fi
 
-# If null, is the first release
-if [ $(git tag | wc -l) = "0" ];then
-	git_tag=${VERSION:=v1.0}
-	request_create_release
+local current_branch=$(git branch | grep "^*" | awk '{print $2}')
+if [ "$current_branch" = "master" ];then
+	# If null, is the first release
+	if [ $(git tag | wc -l) = "0" ];then
+		git_tag=${VERSION:=v1.0}
+		request_create_release
+	else
+		last_tag_number=$(git tag -l | sort -V | tail -n 1 | cut -c 2- | cut -d '.' -f1)
+		new_tag=$(echo "$last_tag_number + 1" | bc)
+		# git_tag="v${new_tag}.0"
+		git_tag=${VERSION:=v${new_tag}.0}
+		request_create_release
+	fi
 else
-	last_tag_number=$(git tag -l | sort -V | tail -n 1 | cut -c 2- | cut -d '.' -f1)
-	new_tag=$(echo "$last_tag_number + 1" | bc)
-	# git_tag="v${new_tag}.0"
-	git_tag=${VERSION:=v${new_tag}.0}
-	request_create_release
+	echo "This Action run only in master branch"
+	exit 0
 fi
